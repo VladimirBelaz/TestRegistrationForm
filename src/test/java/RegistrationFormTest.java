@@ -6,22 +6,10 @@ import org.openqa.selenium.support.ui.Select;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class RegistrationFormTest {
+public class RegistrationFormTest extends BaseTest {
     private static final String BASE_URL = System.getProperty("BASE_URL");
     private static final String USERNAME = System.getProperty("USERNAME");
     private static final String PASSWORD = System.getProperty("PASSWORD");
-    private WebDriver driver;
-    private final Logger logger = LogManager.getLogger(RegistrationFormTest.class);
-
-    @BeforeEach
-    public void setup() {
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
-        logger.info("Открытие страницы: {}", BASE_URL);
-        driver.get(BASE_URL);
-        logger.info("Страница успешно открыта, заголовок: {} ✅", driver.getTitle());
-        logger.info("Текущий URL: {}", driver.getCurrentUrl());
-    }
 
     @Test
     public void testAlert() {
@@ -43,19 +31,5 @@ public class RegistrationFormTest {
         Assertions.assertTrue(lines[3].trim().contains("intermediate"));
         logger.info("Авторизация успешна ✅");
 
-    }
-
-    @AfterEach
-    public void tearDown() {
-        if (driver != null) {
-            try {
-                driver.quit();
-                logger.info("Драйвер успешно закрыт ✅");
-            } catch (Exception e) {
-                logger.error("Ошибка при закрытии драйвера: {} ❌", e.getMessage());
-            }
-            driver = null;
-        }
-        logger.info("Завершение теста");
     }
 }
