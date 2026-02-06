@@ -20,7 +20,7 @@ public class RegistrationFormTest extends BaseTest {
         driver.findElement(By.id("confirm_password")).sendKeys(PASSWORD);
         driver.findElement(By.id("birthdate")).sendKeys("23.02.2000");
         Select languageSelect = new Select(driver.findElement(By.id("language_level")));
-        languageSelect.selectByValue("intermediate");
+        languageSelect.selectByValue(LanguageLevel.INTERMEDIATE.getValue());
         driver.findElement(By.cssSelector("input[type='submit']")).click();
         logger.info("Отправка данных ✅");
         String[] lines = driver.findElement(By.id("output")).getText().split("\n");

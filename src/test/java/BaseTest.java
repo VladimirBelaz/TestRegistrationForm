@@ -16,23 +16,10 @@ public class BaseTest {
 
     @BeforeEach
     public void setUp() {
-        // Инициализация логгера для наследника
         logger = LogManager.getLogger(this.getClass());
 
-        WebDriverManager.chromedriver().setup();
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--no-sandbox");
-        options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("--disable-gpu");
-        options.addArguments("--window-size=1920,1080");
-        options.addArguments("--ignore-certificate-errors");
-        options.addArguments("--disable-extensions");
-        options.addArguments("--remote-allow-origins=*");
-
-        driver = new ChromeDriver(options);
-
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(60));
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        BrowserType browserType = BrowserType.valueOf(System.getProperty("browser", "CHROME").toUpperCase());
+        driver = WebDriverFactory.createDriver(browserType);
 
         logger.info("Драйвер инициализирован");
     }

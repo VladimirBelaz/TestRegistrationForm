@@ -20,6 +20,7 @@
         <BASE_URL>https://otus.home.kartushin.su/form.html</BASE_URL>
         <USERNAME>JonnyDepp</USERNAME>
         <PASSWORD>00000000</PASSWORD>
+        <browser>CHROME</browser>
     </properties>
 
 
@@ -82,6 +83,10 @@
                         <property>
                             <name>PASSWORD</name>
                             <value>${PASSWORD}</value>
+                        </property>
+                        <property>
+                            <name>browser</name>
+                            <value>${browser}</value>
                         </property>
                     </systemProperties>
                 </configuration>
