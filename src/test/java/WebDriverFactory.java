@@ -10,11 +10,11 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import java.time.Duration;
 
 public class WebDriverFactory {
-
     public static WebDriver createDriver(BrowserType browserType) {
         return createDriver(browserType, false);
     }
 
+    // Основной метод с поддержкой headless
     public static WebDriver createDriver(BrowserType browserType, boolean headless) {
         switch (browserType) {
             case CHROME:
@@ -28,16 +28,31 @@ public class WebDriverFactory {
         }
     }
 
+    // Для обратной совместимости - если вдруг нужно из строки
+    public static WebDriver createDriver(String browserName, boolean headless) {
+        try {
+            BrowserType browserType = BrowserType.valueOf(browserName.toUpperCase());
+            return createDriver(browserType, headless);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Неизвестный браузер: " + browserName + ". Используем Chrome.");
+            return createChromeDriver(headless);
+        }
+    }
+
     private static WebDriver createChromeDriver(boolean headless) {
         WebDriverManager.chromedriver().setup();
 
         ChromeOptions options = new ChromeOptions();
+
         if (headless) {
-            options.addArguments("--headless");
+            options.addArguments("--headless=new");
+            options.addArguments("--disable-gpu");
         }
+
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--window-size=1920,1080");
+        options.addArguments("--remote-allow-origins=*");
 
         WebDriver driver = new ChromeDriver(options);
         configureDriver(driver);
@@ -48,6 +63,7 @@ public class WebDriverFactory {
         WebDriverManager.firefoxdriver().setup();
 
         FirefoxOptions options = new FirefoxOptions();
+
         if (headless) {
             options.addArguments("--headless");
         }
@@ -61,6 +77,7 @@ public class WebDriverFactory {
         WebDriverManager.edgedriver().setup();
 
         EdgeOptions options = new EdgeOptions();
+
         if (headless) {
             options.addArguments("--headless");
         }
@@ -70,6 +87,7 @@ public class WebDriverFactory {
         return driver;
     }
 
+    // ВСЕ настройки в одном месте
     private static void configureDriver(WebDriver driver) {
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(60));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));

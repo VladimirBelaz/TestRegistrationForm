@@ -1,10 +1,6 @@
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class RegistrationFormTest extends BaseTest {
     private static final String BASE_URL = System.getProperty("BASE_URL");
@@ -30,6 +26,5 @@ public class RegistrationFormTest extends BaseTest {
         Assertions.assertTrue(lines[2].trim().contains("2000-02-23"));
         Assertions.assertTrue(lines[3].trim().contains("intermediate"));
         logger.info("Авторизация успешна ✅");
-
     }
 }

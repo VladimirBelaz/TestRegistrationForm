@@ -1,14 +1,9 @@
 // BaseTest.java
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.time.Duration;
 
 public class BaseTest {
     protected WebDriver driver;
@@ -19,7 +14,10 @@ public class BaseTest {
         logger = LogManager.getLogger(this.getClass());
 
         BrowserType browserType = BrowserType.valueOf(System.getProperty("browser", "CHROME").toUpperCase());
-        driver = WebDriverFactory.createDriver(browserType);
+        boolean headless = Boolean.parseBoolean(System.getProperty("headless", "false"));
+
+        // Создаем драйвер с помощью фабрики
+        driver = WebDriverFactory.createDriver(browserType, headless);
 
         logger.info("Драйвер инициализирован");
     }
