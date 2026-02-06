@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.example</groupId>
-    <artifactId>TestRegistrationForm</artifactId>
+    <artifactId>RegistrationFormTest</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
@@ -17,7 +17,12 @@
         <junit.version>5.10.0</junit.version>
         <log4j.version>2.23.1</log4j.version>
         <webdrivermanager.version>5.8.0</webdrivermanager.version>
+        <BASE_URL>https://otus.home.kartushin.su/form.html</BASE_URL>
+        <USERNAME>JonnyDepp</USERNAME>
+        <PASSWORD>00000000</PASSWORD>
     </properties>
+
+
 
     <dependencies>
         <!-- Selenium -->
@@ -59,21 +64,26 @@
 
     <build>
         <plugins>
-            <!-- Maven Surefire Plugin для JUnit 5 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.2.5</version>
                 <configuration>
-                    <systemPropertyVariables>
-                        <username>${username}</username>
-                        <password>${password}</password>
-                        <baseUrl>${baseUrl}</baseUrl>
-                    </systemPropertyVariables>
-                    <!-- Для поддержки JUnit 5 -->
-                    <includes>
-                        <include>**/*Test.java</include>
-                    </includes>
+                    <!-- Убираем argLine и используем правильную конфигурацию -->
+                    <systemProperties>
+                        <property>
+                            <name>BASE_URL</name>
+                            <value>${BASE_URL}</value>
+                        </property>
+                        <property>
+                            <name>USERNAME</name>
+                            <value>${USERNAME}</value>
+                        </property>
+                        <property>
+                            <name>PASSWORD</name>
+                            <value>${PASSWORD}</value>
+                        </property>
+                    </systemProperties>
                 </configuration>
             </plugin>
 

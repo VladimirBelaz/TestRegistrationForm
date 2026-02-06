@@ -6,14 +6,12 @@ import org.openqa.selenium.support.ui.Select;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.time.Duration;
-
-public class TestRegistrationForm {
-    private static final String BASE_URL = System.getenv("BASE_URL");
-    private static final String USERNAME = System.getenv("USERNAME");
-    private static final String PASSWORD = System.getenv("PASSWORD");
+public class RegistrationFormTest {
+    private static final String BASE_URL = System.getProperty("BASE_URL");
+    private static final String USERNAME = System.getProperty("USERNAME");
+    private static final String PASSWORD = System.getProperty("PASSWORD");
     private WebDriver driver;
-    private final Logger logger = LogManager.getLogger(TestRegistrationForm.class);
+    private final Logger logger = LogManager.getLogger(RegistrationFormTest.class);
 
     @BeforeEach
     public void setup() {
