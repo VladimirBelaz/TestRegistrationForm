@@ -13,7 +13,6 @@
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <selenium.version>4.20.0</selenium.version>
-        <!-- Обновляем версии для JUnit -->
         <junit.version>5.10.0</junit.version>
         <log4j.version>2.23.1</log4j.version>
         <webdrivermanager.version>5.8.0</webdrivermanager.version>
@@ -93,7 +92,6 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.2.5</version>
                 <configuration>
-                    <!-- Убираем argLine и используем правильную конфигурацию -->
                     <systemProperties>
                         <property>
                             <name>BASE_URL</name>

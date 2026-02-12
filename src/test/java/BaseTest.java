@@ -9,6 +9,7 @@ public class BaseTest {
     protected WebDriver driver;
     protected Logger logger;
 
+    private static final String BASE_URL = System.getProperty("BASE_URL");
     @BeforeEach
     public void setUp() {
         logger = LogManager.getLogger(this.getClass());
@@ -18,7 +19,7 @@ public class BaseTest {
 
         // Создаем драйвер с помощью фабрики
         driver = WebDriverFactory.createDriver(browserType, headless);
-
+        driver.get(BASE_URL);
         logger.info("Драйвер инициализирован");
     }
 
